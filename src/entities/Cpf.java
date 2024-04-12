@@ -6,11 +6,12 @@ import java.util.Set;
 public class Cpf {
 
     public void validarCpf (String cpf, Set<String> validos, List<String> invalidos){
-        boolean stringNumerica = contemNumeros(cpf);
+        String numeroCpf = limparCpf(cpf);
+        boolean stringNumerica = contemNumeros(numeroCpf);
         if (!stringNumerica){
             invalidos.add(cpf);
         }else{
-            if (cpf.length() == 11){
+            if (numeroCpf.length() == 11){
                 validos.add(cpf);
             }
             else {
@@ -33,6 +34,10 @@ public class Cpf {
         contemApenasNumeros = numero.matches("[0-9]+");
         return contemApenasNumeros;
     }
-
-
+    public String limparCpf(String cpf){
+        cpf = cpf.replaceAll("\\s","");
+        cpf = cpf.replaceAll("\\.","");
+        cpf = cpf.replaceAll("\\-","");
+        return cpf;
+    }
 }
